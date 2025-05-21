@@ -40,3 +40,14 @@ type Tag struct {
 type Wallet struct {
 	Address string `json:address`
 }
+
+
+type CheckStartupExistsRequest struct {
+	Name                 string `json:"name,omitempty"`                   // 项目名称（可选，与合约地址至少传一个）
+	TokenContractAddress string `json:"token_contract_address,omitempty"` // 代币合约地址（可选，与名称至少传一个）
+	IsDeleted            bool   `json:"is_deleted,omitempty"`             // 是否包含已删除记录（默认：false）
+}
+
+type CheckStartupExistsResponse struct {
+	Exists bool `json:"exists"` // 是否存在
+}

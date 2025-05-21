@@ -1,3 +1,11 @@
 syntax = "v1"
 
+syntax = "v1"
+
+// Example : window 系统
+// cd F:\go-Lin\backend-v2\app\api
+// F://goctl.exe api go -api  api/meta_land.api -dir . -style go_zero
+
 import "startup/startup.api"
+import "startup/startup_check_exists.api"
+

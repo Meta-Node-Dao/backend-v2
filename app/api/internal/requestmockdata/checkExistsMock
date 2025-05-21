@@ -1,0 +1,5 @@
+{
+  "name": "Test Startup",     // 必填，varchar(100)，非空
+  "token_contract_address": "0x1234567890abcdef...", // 必填，char(42)
+  "is_deleted": false         // 可选，默认 0（false）
+}

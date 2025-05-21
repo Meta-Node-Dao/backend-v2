@@ -3,7 +3,8 @@ Host: 0.0.0.0
 Port: 8888
 
 DB:
-  DataSource: ""
+  DataSource: "root:123456@tcp(127.0.0.1:3306)/metaland?charset=utf8mb4&parseTime=True&loc=Local"
+
 
 Auth:
   AccessSecret: "123123"
