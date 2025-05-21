@@ -13,6 +13,8 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+
+
 	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.OIDCAuthMiddleware},
@@ -23,30 +25,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/startups",
 					Handler: startup.ListStartupsHandler(serverCtx),
 				},
-			}...,
-		),
-		rest.WithPrefix("/api/startup"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.OIDCAuthMiddleware},
-			[]rest.Route{
 				{
 					// 创建
 					Method:  http.MethodPost,
 					Path:    "/startups",
 					Handler: startup.CreateStartupsHandler(serverCtx),
 				},
-			}...,
-		),
-		rest.WithPrefix("/api/startup"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.OIDCAuthMiddleware},
-			[]rest.Route{
 				{
 					// 判断项目是否存在
 					Method:  http.MethodGet,
@@ -57,4 +41,5 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithPrefix("/api/startup"),
 	)
+
 }
