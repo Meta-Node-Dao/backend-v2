@@ -13,9 +13,9 @@ import (
 )
 
 // If you want to run on window and debugger on local env, pls make sure you locate your dir : F:\go-Lin\backend-v2\app\api\etc (change to your own)
-var configFile = flag.String("f", "F:\\go-Lin\\backend-v2\\app\\api\\etc\\meta_land.yaml", "the config file")
+//var configFile = flag.String("f", "F:\\go-Lin\\backend-v2\\app\\api\\etc\\meta_land.yaml", "the config file")
 
-// var configFile = flag.String("f", "etc/meta_land.yaml", "the config file")
+var configFile = flag.String("f", "etc/meta_land.yaml", "the config file")
 
 func main() {
 	flag.Parse()
