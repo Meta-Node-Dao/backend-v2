@@ -37,6 +37,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/check-exists",
 					Handler: startup.CheckStartupExistsHandler(serverCtx),
 				},
+				{
+					// 获取信息通过ID
+					Method:  http.MethodGet,
+					Path:    "/getInfo/:startupId([0-9]+)",  // 直接在路径中嵌入正则表达式，限制startupId为数字
+					Handler: startup.GetStartupInfoHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithPrefix("/api/startup"),

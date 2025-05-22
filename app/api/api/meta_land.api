@@ -1,11 +1,8 @@
 syntax = "v1"
 
-syntax = "v1"
-
 // Example : window 系统
-// cd F:\go-Lin\backend-v2\app\api
+// cd F:\go-Lin\backend-v2-mine\app\api  填你自己本地的实际路径
 // F://goctl.exe api go -api  api/meta_land.api -dir . -style go_zero
-
 import "startup/startup.api"
 import "startup/startup_check_exists.api"
-
+import "startup/startup_info.api"

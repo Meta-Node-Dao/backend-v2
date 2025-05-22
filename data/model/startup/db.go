@@ -3,6 +3,7 @@ package startup
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"gorm.io/gorm"
 	_ "metaLand/data/model/tag"
 	"time"
@@ -144,4 +145,31 @@ func CheckExists(db *gorm.DB, input *CheckStartupsRequest) (bool, error) {
 	}
 
 	return count > 0, nil
+}
+
+// GetStartupInfo
+
+func GetStartupInfo(db *gorm.DB, startupId *uint64) (resp *Startup, err error) {
+
+	// 检查 startupId 是否为空指针
+	if startupId == nil {
+		return nil, fmt.Errorf("startupId is required")
+	}
+
+	// 初始化响应对象
+	resp = &Startup{}
+
+	// 查询数据库
+	result := db.Where("id = ? AND is_deleted = ?", *startupId, false).First(resp)
+
+	// 处理查询结果
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, fmt.Errorf("startup with ID %d not found", *startupId)
+		}
+		return nil, fmt.Errorf("database error: %w", result.Error)
+	}
+
+	return resp, nil
+
 }
