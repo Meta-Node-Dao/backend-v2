@@ -1,3 +1,5 @@
+package startup
+
 import (
 	"database/sql"
 	"gorm.io/datatypes"
