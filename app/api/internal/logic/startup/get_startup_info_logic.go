@@ -29,12 +29,11 @@ func NewGetStartupInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 	}
 }
 
-func (l *GetStartupInfoLogic) GetStartupInfo(req *types.EmptyRequest) (resp *types.StartupInfoResponse, err error) {
-
+func (l *GetStartupInfoLogic) GetStartupInfo(req *types.GetStartupInfoRequest) (resp *types.StartupInfoResponse, err error) {
 	//TODO 从路径参数中获取 startupId  startupId  一直没有取到值
 
-	startupId, ok := l.ctx.Value("startupId").(uint64)
-	if !ok {
+	startupId := req.StartupId
+	if startupId < 1 {
 		return nil, errors.New("invalid startupId")
 	}
 

@@ -13,14 +13,13 @@ type CheckStartupExistsResponse struct {
 	Exists bool `json:"exists"` // 是否存在
 }
 
-type EmptyRequest struct {
-}
-
 type FollowRelation struct {
 	ComerID uint64 `json:comerID`
 }
 
-
+type GetStartupInfoRequest struct {
+	StartupId uint64 `form:"startupId"`
+}
 
 type Startup struct {
 	ComerID              uint64 `json:"comerID" db:"comer_id"`

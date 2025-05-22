@@ -10,12 +10,13 @@ service metaLand {
     // --------------------- 获取项目详情 ---------------------
     @doc "获取项目详情"
     @handler GetStartupInfo
-    get /getInfo/:startupId (EmptyRequest) returns (StartupInfoResponse)
+    get /getInfo (GetStartupInfoRequest) returns (StartupInfoResponse)
 }
 
 type (
-    // 空请求体（参数通过路径传递）
-    EmptyRequest {
+    // 请求体，包含查询参数startupId
+    GetStartupInfoRequest {
+        StartupId uint64 `form:"startupId"`
     }
 
     // 项目详情响应体
