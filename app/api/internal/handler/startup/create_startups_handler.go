@@ -9,18 +9,18 @@ import (
 	"metaLand/app/api/internal/types"
 )
 
-// 查询项目列表
+// 创建项目列表
 
-func ListStartupsHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CreateStartupsHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.ListStartupsRequest
+		var req types.CreateStartupsRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := startup.NewListStartupsLogic(r.Context(), svcCtx)
-		resp, err := l.ListStartups(&req)
+		l := startup.NewCreateStartupsLogic(r.Context(), svcCtx)
+		resp, err := l.CreateStartups(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

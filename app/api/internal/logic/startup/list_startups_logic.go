@@ -53,11 +53,11 @@ func (l *ListStartupsLogic) ListStartups(req *types.ListStartupsRequest) (resp *
 			Mission:              s.Mission,
 			TokenContractAddress: s.TokenContractAddress,
 			Overview:             s.Overview,
-			ChainID:              s.ChainID,
-			TxHash:               s.TxHash,
-			OnChain:              s.OnChain,
-			KYC:                  s.KYC,
-			ContractAudit:        s.ContractAudit,
+			//ChainID:              s.ChainID,
+			TxHash:        s.TxHash,
+			OnChain:       s.OnChain,
+			KYC:           s.KYC,
+			ContractAudit: s.ContractAudit,
 		})
 	}
 

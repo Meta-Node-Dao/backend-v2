@@ -1,0 +1,33 @@
+{
+  "comer_id": 12345,          // 必填，bigint，非默认值（0）
+  "name": "Test Startup",     // 必填，varchar(100)，非空
+  "mode": 1,                  // 必填，smallint（1:ESG）
+  "logo": "https://example.com/logo.png", // 必填，varchar(200)
+  "cover": "https://example.com/cover.jpg", // 必填，varchar(200)
+  "mission": "Our mission is to innovate", // 必填，varchar(100)
+  "chain_id": 33137, // 必填，varchar(100)
+  "tx_hash":"sadasdsadsad31231231231231212",
+  "overview": "This is a test startup overview...", // 必填，text
+  "token_contract_address": "0x1234567890abcdef...", // 必填，char(42)
+  "on_chain": true,           // 可选，默认值 0（false），此处显式传 true
+  "kyc": "kyc_document.pdf",  // 可选，默认空字符串
+  "contract_audit": "audit_report.pdf", // 可选，默认空字符串
+  "website": "https://example.com", // 可选，默认空字符串
+  "discord": "https://discord.gg/xxx", // 可选
+  "twitter": "https://twitter.com/xxx", // 可选
+  "telegram": "https://t.me/xxx", // 可选
+  "docs": "https://docs.example.com", // 可选
+  "email": "contact@example.com", // 可选，varchar(180)
+  "facebook": "https://facebook.com/xxx", // 可选
+  "medium": "https://medium.com/xxx", // 可选
+  "linktree": "https://linktr.ee/xxx", // 可选
+  "launch_network": 1,        // 可选，默认 0（主网 ID）
+  "token_name": "Test Token", // 可选，varchar(100)
+  "token_symbol": "TST",      // 可选，varchar(50)
+  "total_supply": 1000000,    // 可选，bigint，默认 0
+  "presale_start": "2025-06-01T00:00:00Z", // 可选，datetime（ISO 8601 格式）
+  "presale_end": "2025-06-15T00:00:00Z",   // 可选
+  "launch_date": "2025-06-30T00:00:00Z",   // 可选
+  "tab_sequence": "[home,about,contact]", // 可选，varchar(200)
+  "is_deleted": false         // 可选，默认 0（false）
+}
