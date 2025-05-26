@@ -2,6 +2,7 @@ package startup
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/ethereum/go-ethereum"
 	ethCommon "github.com/ethereum/go-ethereum/common"
@@ -35,8 +36,8 @@ func (t *TaskStartup) HandleCreateEvent(params []any) {
 		IsValidate bool   `json:"isValidate"`
 	})
 	comer := params[2].(ethCommon.Address)
-	logx.Info(name, comer)
-	logx.Info(profile)
+	logx.Debug(name, comer)
+	logx.Debug(profile)
 }
 
 func (t *TaskStartup) queryLogs() {
@@ -53,7 +54,7 @@ func (t *TaskStartup) queryLogs() {
 		}
 
 		lastHeigh, err := t.ctx.Redis.Get(ctx, common.GetKey(chainID, info.Address)).Uint64()
-		if err != nil && err != redis.Nil {
+		if err != nil && !errors.Is(err, redis.Nil) {
 			logx.Info(err)
 			continue
 		}
@@ -86,7 +87,7 @@ func (t *TaskStartup) queryLogs() {
 		}
 
 		for {
-			logx.Info(fmt.Sprintf("start: %d end: %d current: %d", startBlock.Int64(), endBlock.Int64(), currentHeight))
+			logx.Debug(fmt.Sprintf("start: %d end: %d current: %d", startBlock.Int64(), endBlock.Int64(), currentHeight))
 
 			logs, err := info.Client.FilterLogs(ctx, ethereum.FilterQuery{
 				FromBlock: startBlock,
