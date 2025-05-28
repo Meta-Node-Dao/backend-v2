@@ -2,7 +2,6 @@ package startup
 
 import (
 	"database/sql"
-	"gorm.io/datatypes"
 	"metaLand/data/model"
 	"metaLand/data/model/tag"
 )
@@ -34,14 +33,14 @@ type Startup struct {
 	Medium   string `gorm:"medium" json:"medium"`
 	Linktree string `gorm:"linktree" json:"linktree"`
 
-	LaunchNetwork int            `gorm:"launch_network" json:"launchNetwork"`
-	TokenName     string         `gorm:"token_name" json:"tokenName"`
-	TokenSymbol   string         `gorm:"token_symbol" json:"tokenSymbol"`
-	TotalSupply   int64          `gorm:"total_supply" json:"totalSupply"`
-	PresaleStart  sql.NullTime   `gorm:"presale_start" json:"presaleStart"`
-	PresaleEnd    sql.NullTime   `gorm:"presale_end" json:"presaleEnd"`
-	LaunchDate    sql.NullTime   `gorm:"launch_date" json:"launchDate"`
-	TabSequence   datatypes.JSON `gorm:"tab_sequence" json:"tabSequence"`
+	LaunchNetwork int          `gorm:"launch_network" json:"launchNetwork"`
+	TokenName     string       `gorm:"token_name" json:"tokenName"`
+	TokenSymbol   string       `gorm:"token_symbol" json:"tokenSymbol"`
+	TotalSupply   int64        `gorm:"total_supply" json:"totalSupply"`
+	PresaleStart  sql.NullTime `gorm:"presale_start" json:"presaleStart"`
+	PresaleEnd    sql.NullTime `gorm:"presale_end" json:"presaleEnd"`
+	LaunchDate    sql.NullTime `gorm:"launch_date" json:"launchDate"`
+	TabSequence   string       `gorm:"tab_sequence" json:"tabSequence"`
 }
 
 // TableName Startup table name for gorm
