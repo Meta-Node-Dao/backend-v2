@@ -363,20 +363,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		rest.WithPrefix("/api/share"),
 	)
 
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.OIDCAuthMiddleware},
-			[]rest.Route{
-				{
-					// 查询项目列表
-					Method:  http.MethodGet,
-					Path:    "/startups",
-					Handler: startup.ListStartupsHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithPrefix("/api/startup"),
-	)
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
