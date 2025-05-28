@@ -49,6 +49,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/startups",
 					Handler: startup.ListStartupsHandler(serverCtx),
 				},
+				{
+					// 更新项目
+					Method:  http.MethodPost,
+					Path:    "/update-startup",
+					Handler: startup.UpdateStartupsHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithPrefix("/api/startup"),

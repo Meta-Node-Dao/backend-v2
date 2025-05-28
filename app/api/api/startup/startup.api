@@ -31,5 +31,11 @@ service metaLand {
     @doc "创建项目"
     @handler CreateStartups
     post /create-startup (CreateStartupsRequest) returns (CreateStartupsResponse)
+
+
+    // --------------------- 更新项目 ---------------------
+    @doc "更新项目"
+    @handler UpdateStartups
+    post /update-startup (UpdateStartupsRequest) returns (UpdateStartupsResponse)
 }
 

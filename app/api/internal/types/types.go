@@ -240,3 +240,18 @@ type StartupInfoResponse struct {
 	Message string  `json:"message"` // 消息
 	Data    Startup `json:"data"`    // 项目详情
 }
+
+type UpdateStartupsRequest struct {
+	StartupId uint64 `json:"startup_id"` // 项目ID
+	Name      string `json:"name"`       // 项目名称（必填）
+	Mode      uint8  `json:"mode"`       // 项目类型（0:NONE, 1:ESG, 2:NGO, 3:DAO, 4:COM）
+	Logo      string `json:"logo"`       // 项目LOGO地址
+	Cover     string `json:"cover"`      // 项目封面地址
+	Overview  string `json:"overview"`   // 项目简介（必填）
+	Website   string `json:"website"`    // 官网地址
+}
+
+type UpdateStartupsResponse struct {
+	Suc bool   `json:"suc"` // 是否成功
+	Msg string `json:"msg"` // 提示信息（可选）
+}

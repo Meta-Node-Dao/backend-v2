@@ -180,3 +180,24 @@ func GetStartupInfo(db *gorm.DB, startupId *uint64) (resp *Startup, err error) {
 	return resp, nil
 
 }
+
+// UpdateStartup
+
+func UpdateStartup(db *gorm.DB, data *Startup) (bool, error) {
+
+	// 执行更新操作
+	result := db.Updates(data)
+
+	// 检查是否有错误发生
+	if result.Error != nil {
+		return false, result.Error
+	}
+
+	// 检查是否成功更新记录
+	if result.RowsAffected == 0 {
+		return false, errors.New("failed to insert startup record")
+	}
+
+	return true, nil
+
+}
