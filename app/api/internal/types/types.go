@@ -3,6 +3,8 @@
 
 package types
 
+import "time"
+
 type Base struct {
 	ID        uint64 `gorm:"column:id;primaryKey;autoIncrement" json:"id"`
 	CreatedAt string `gorm:"column:created_at;autoCreateTime" json:"created_at"`
@@ -206,9 +208,9 @@ type CreateStartupsRequest struct {
 	TokenName            string `json:"token_name"`             // 代币名称
 	TokenSymbol          string `json:"token_symbol"`           // 代币符号
 	TotalSupply          int64  `json:"total_supply"`           // 代币总供应量
-	PresaleStart         string `json:"presale_start"`          // 预售开始时间（可选，时间格式：RFC3339）
-	PresaleEnd           string `json:"presale_end"`            // 预售结束时间（可选，时间格式：RFC3339）
-	LaunchDate           string `json:"launch_date"`            // 上线时间（可选，时间格式：RFC3339）
+	PresaleStart         *time.Time `json:"presale_start"`          // 预售开始时间（可选，时间格式：RFC3339）
+	PresaleEnd           *time.Time `json:"presale_end"`            // 预售结束时间（可选，时间格式：RFC3339）
+	LaunchDate           *time.Time `json:"launch_date"`            // 上线时间（可选，时间格式：RFC3339）
 	TabSequence          string `json:"tab_sequence"`           // 标签页顺序（JSON字符串）
 	IsDeleted            bool   `json:"is_deleted"`             // 是否逻辑删除（默认：false）
 }

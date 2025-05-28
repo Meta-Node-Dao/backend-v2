@@ -18,6 +18,7 @@ type GetStartupInfoLogic struct {
 }
 
 // 获取项目详情
+
 func NewGetStartupInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetStartupInfoLogic {
 	return &GetStartupInfoLogic{
 		Logger: logx.WithContext(ctx),

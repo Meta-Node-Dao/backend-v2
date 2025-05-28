@@ -17,6 +17,7 @@ type ListStartupsLogic struct {
 }
 
 // 查询项目列表
+
 func NewListStartupsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListStartupsLogic {
 	return &ListStartupsLogic{
 		Logger: logx.WithContext(ctx),
@@ -55,11 +56,11 @@ func (l *ListStartupsLogic) ListStartups(req *types.ListStartupsRequest) (resp *
 			Mission:              s.Mission,
 			TokenContractAddress: s.TokenContractAddress,
 			Overview:             s.Overview,
-			ChainID:              s.ChainID,
-			TxHash:               s.TxHash,
-			OnChain:              s.OnChain,
-			KYC:                  s.KYC,
-			ContractAudit:        s.ContractAudit,
+			//ChainID:              s.ChainID,
+			TxHash:        s.TxHash,
+			OnChain:       s.OnChain,
+			KYC:           s.KYC,
+			ContractAudit: s.ContractAudit,
 		})
 	}
 	return

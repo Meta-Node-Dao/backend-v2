@@ -16,6 +16,7 @@ type CreateStartupsLogic struct {
 }
 
 // 创建项目
+
 func NewCreateStartupsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateStartupsLogic {
 	return &CreateStartupsLogic{
 		Logger: logx.WithContext(ctx),
@@ -69,6 +70,10 @@ func (l *CreateStartupsLogic) CreateStartups(req *types.CreateStartupsRequest) (
 	}
 
 	response.Suc = data
+	response.Msg = "写入成功!"
 
-	return
+	return &types.CreateStartupsResponse{
+		Suc: true,
+		Msg: "写入成功",
+	}, nil
 }

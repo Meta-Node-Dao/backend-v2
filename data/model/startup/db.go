@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"gorm.io/gorm"
-	"metaLand/data/model/tag"
+	"metaLand/data/model"
 	"time"
 )
 
@@ -27,14 +27,17 @@ func ListStartups(db *gorm.DB, comerID uint64, input *ListStartupRequest, startu
 	if total == 0 {
 		return
 	}
-	err = db.Order("created_at DESC").Limit(input.Limit).Offset(input.Offset).Preload("Wallets").Preload("HashTags", "category = ?", tag.Startup).Preload("Members").Preload("Members.Comer").Preload("Members.ComerProfile").Preload("Follows").Find(startups).Error
+	err = db.Order("created_at DESC").Limit(input.Limit).Offset(input.Offset).
+		//Preload("Wallets").Preload("HashTags", "category = ?", tag.Startup).Preload("Members").Preload("Members.Comer").
+		//Preload("Members.ComerProfile").Preload("Follows").
+		Find(startups).Error
 	return
 }
 
 func StartupOnChain(db *gorm.DB, txHash string, chainID uint64, comerID uint64) (err error) {
 	return db.Where(Startup{
-		TxHash:  txHash,
-		ChainID: chainID,
+		TxHash: txHash,
+		//ChainID: chainID,
 		ComerID: comerID,
 	}).Where("on_chain", false).Updates(Startup{
 		OnChain: true,
@@ -46,6 +49,7 @@ func StartupOnChain(db *gorm.DB, txHash string, chainID uint64, comerID uint64) 
 func CreateStartups(db *gorm.DB, input *CreateStartupsRequest) (suc bool, err error) {
 	// 创建Startup实例
 	startup := &Startup{
+		Base:                 model.Base{}, // 关键：确保 Base 非 nil
 		ComerID:              input.ComerID,
 		Name:                 input.Name,
 		Mode:                 input.Mode,
@@ -71,9 +75,9 @@ func CreateStartups(db *gorm.DB, input *CreateStartupsRequest) (suc bool, err er
 		TokenName:            input.TokenName,
 		TokenSymbol:          input.TokenSymbol,
 		TotalSupply:          input.TotalSupply,
-		PresaleStart:         StringToNullTime(input.PresaleStart),
-		PresaleEnd:           StringToNullTime(input.PresaleEnd),
-		LaunchDate:           StringToNullTime(input.LaunchDate),
+		PresaleStart:         TimePtrToNullTime(input.PresaleStart),
+		PresaleEnd:           TimePtrToNullTime(input.PresaleEnd),
+		LaunchDate:           TimePtrToNullTime(input.LaunchDate),
 		TabSequence:          input.TabSequence,
 	}
 
@@ -95,20 +99,12 @@ func CreateStartups(db *gorm.DB, input *CreateStartupsRequest) (suc bool, err er
 
 // 辅助函数：将 string 转换为 sql.NullTime
 
-func StringToNullTime(s string) sql.NullTime {
-	if s == "" {
+func TimePtrToNullTime(t *time.Time) sql.NullTime {
+	if t == nil {
 		return sql.NullTime{Valid: false}
 	}
-
-	// 尝试解析 RFC3339 格式
-	t, err := time.Parse(time.RFC3339, s)
-	if err != nil {
-		// 可添加其他格式的解析逻辑，如 "2006-01-02"
-		return sql.NullTime{Valid: false}
-	}
-
 	return sql.NullTime{
-		Time:  t,
+		Time:  *t,
 		Valid: true,
 	}
 }
