@@ -4,7 +4,19 @@
 package types
 
 type FollowRelation struct {
-	ComerID uint64 `json:comerID`
+	ComerID uint64 `json:"comerID"`
+}
+
+type FollowedByMeResponse struct {
+	IsFollowed bool `json:"isFollowed"`
+}
+
+type ListComerStartup struct {
+	StartupID uint64 `json:"startupID"`
+	ComerId   uint64 `json:"comerID"`
+	OnChain   bool   `json:"onChain"`
+	Name      string `json:"name"`
+	FollowedByMeResponse
 }
 
 type Startup struct {
@@ -38,5 +50,5 @@ type Tag struct {
 }
 
 type Wallet struct {
-	Address string `json:address`
+	Address string `json:"address"`
 }

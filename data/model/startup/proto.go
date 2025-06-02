@@ -2,16 +2,18 @@ package startup
 
 import (
 	"database/sql"
-	"gorm.io/datatypes"
 	"metaLand/data/model"
+	"metaLand/data/model/account"
 	"metaLand/data/model/tag"
+
+	"gorm.io/datatypes"
 )
 
 type Startup struct {
 	model.Base
 	ComerID              uint64    `gorm:"comer_id" json:"comerID"`
 	Name                 string    `gorm:"name" json:"name"`
-	Mode                 uint8     `gorm:"mode" json:"mode"`
+	Mode                 Mode      `gorm:"mode" json:"mode"`
 	Logo                 string    `gorm:"logo" json:"logo"`
 	Cover                string    `gorm:"Cover" json:"cover"`
 	Mission              string    `gorm:"mission" json:"mission"`
@@ -48,3 +50,26 @@ type Startup struct {
 func (Startup) TableName() string {
 	return "startup"
 }
+
+type ListStartupTeamMemberRequest struct {
+	model.ListRequest
+}
+
+type StartupTeamMember struct {
+	model.RelationBase
+	ComerID      uint64               `gorm:"comer_id" json:"comerID"`
+	StartupID    uint64               `gorm:"startup_id" json:"startupID"`
+	Position     string               `gorm:"position" json:"position"`
+	Comer        account.Comer        `gorm:"foreignkey:ID;references:ComerID" json:"comer"`
+	ComerProfile account.ComerProfile `gorm:"foreignkey:ComerID;references:ComerID" json:"comerProfile"`
+	FollowedByMe *bool                `gorm:"-" json:"followedByMe"`
+}
+
+type Mode uint8
+
+const (
+	ModeESG Mode = 1
+	ModeNGO Mode = 2
+	ModeDAO Mode = 3
+	ModeCOM Mode = 4
+)

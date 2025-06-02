@@ -3,15 +3,65 @@
 
 package types
 
+type CreateStartupRequest struct {
+	Logo     string   `json:"logo"`
+	Mode     uint8    `json:"mode,options=1|2|3|4"`
+	Name     string   `json:"name" binding:"required"`
+	Mission  string   `json:"mission" binding:"required"`
+	Overview string   `json:"overview" binding:"required"`
+	TxHash   string   `json:"txHash"`
+	ChainID  uint64   `json:"chainId" binding:"required"`
+	HashTags []string `json:"hashTags" binding:"required"`
+}
+
+type CreateStartupResponse struct {
+	ID uint64 `json:"id"`
+}
+
+type ExistResponse struct {
+	IsExist bool `json:"is_exist"`
+}
+
+type FollowRelationRequest struct {
+	StartupID uint64 `json:"startupID"` // StartupID
+	ComerID   uint64 `json:"comerID"`   // ComerID
+}
+
+type GetStartupRequest struct {
+	ID uint64 `json:"id"` // StartupID
+}
+
+type GetStartupResponse struct {
+	Startup *Startup `json:"startup"`
+}
+
+type GetStartupsByComerIDRequest struct {
+	TargetComerID  uint64 `json:"targetComerID"`  // 目标用户的ComerID
+	CurrentComerId uint64 `json:"currentComerID"` // 当前用户的ComerID
+}
+
+type GetStartupsByComerIDResponse struct {
+	List  []*ListComerStartup `json:"list"`
+	Total int64               `json:"total"`
+}
+
 type ListStartupsRequest struct {
 	Limit     int    `json:"limit"`
 	Offset    int    `json:"offset"`
 	IsDeleted bool   `json:"isDeleted"`
 	Keyword   string `json:"keyword"`
-	Mode      uint8  `json:"mode"`
+	Mode      uint8  `json:"mode,options=1|2|3|4"`
 }
 
 type ListStartupsResponse struct {
-	List  []*Startup `json:list`
-	Total int64      `json: total`
+	List  []*Startup `json:"list"`
+	Total int64      `json:"total"`
+}
+
+type StartupNameRequest struct {
+	Name string `json:"name"`
+}
+
+type TokenContractReqest struct {
+	TokenContract string `json:"token_contract"`
 }
